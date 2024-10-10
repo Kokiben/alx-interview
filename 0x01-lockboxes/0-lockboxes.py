@@ -18,8 +18,8 @@ def canUnlockAll(boxes):
     accessible_boxes = [0]
 
     # Iterate over each accessible box and use its keys to unlock more boxes.
-    for box_index in accessible_boxes:
-        for key in boxes[box_index]:
+    for n in accessible_boxes:
+        for key in boxes[n]:
             # If the key opens a box that hasn't been accessed yet, add it to the list.
             if key not in accessible_boxes and key < len(boxes):
                 accessible_boxes.append(key)
