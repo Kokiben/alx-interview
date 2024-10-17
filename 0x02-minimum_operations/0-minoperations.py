@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 """ In a text file, there is a single character H """
 
+
 def minOperations(target_count: int) -> int:
     """
     Calculatesmin num of opera needed to achieve exactly target_count H char.
     """
-    # If target_count is less than 2, it's not feasible to create more char through opr.
+    # If target_count is less than 2, it's not more char through opr.
     if target_count < 2:
         return 0
 
