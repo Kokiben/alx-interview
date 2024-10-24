@@ -1,63 +1,44 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
+"""
+Processing log data
+"""
+
 import sys
-import signal
 
-# Initialize variables
-total_size = 0
-status_codes_count = {
-    '200': 0, '301': 0, '400': 0, '401': 0, '403': 0,
-    '404': 0, '405': 0, '500': 0
-}
-line_count = 0
+if __name__ == '__main__':
 
-def print_statistics():
-    """Prints the current statistics."""
-    print(f"File size: {total_size}")
-    for code in sorted(status_codes_count.keys()):
-        if status_codes_count[code] > 0:
-            print(f"{code}: {status_codes_count[code]}")
+    total_size, line_counter = 0, 0
+    valid_codes = ["200", "301", "400", "401", "403", "404", "405", "500"]
+    code_counts = {code: 0 for code in valid_codes}
 
-def process_line(line: str):
-    """Processes a single line and updates the metrics if the format is correct."""
-    global total_size, line_count
-    
+    def display_metrics(metrics: dict, size: int) -> None:
+        print("File size: {:d}".format(size))
+        for code, count in sorted(metrics.items()):
+            if count:
+                print("{}: {}".format(code, count))
+
     try:
-        parts = line.split()
-        if len(parts) < 7:
-            return
-        
-        # Extract file size and status code
-        file_size = int(parts[-1])
-        status_code = parts[-2]
+        for log_entry in sys.stdin:
+            line_counter += 1
+            log_parts = log_entry.split()
+            if len(log_parts) < 7:
+                continue
+            try:
+                # Parsing status code and file size
+                status = log_parts[-2]
+                file_size = int(log_parts[-1])
 
-        # Update total file size
-        total_size += file_size
+                if status in code_counts:
+                    code_counts[status] += 1
+                total_size += file_size
+            except (ValueError, IndexError):
+                continue
 
-        # Update status code count if valid
-        if status_code in status_codes_count:
-            status_codes_count[status_code] += 1
-        
-        line_count += 1
+            if line_counter % 10 == 0:
+                display_metrics(code_counts, total_size)
 
-    except Exception:
-        pass  # If there's an error, just skip the line
+        display_metrics(code_counts, total_size)
 
-def signal_handler(sig, frame):
-    """Handles CTRL + C signal and prints the statistics before exiting."""
-    print_statistics()
-    sys.exit(0)
-
-# Set up signal handler for CTRL + C
-signal.signal(signal.SIGINT, signal_handler)
-
-# Read lines from stdin
-try:
-    for line in sys.stdin:
-        process_line(line.strip())
-        
-        # Print statistics after every 10 lines
-        if line_count % 10 == 0:
-            print_statistics()
-except KeyboardInterrupt:
-    print_statistics()
-    sys.exit(0)
+    except KeyboardInterrupt:
+        display_metrics(code_counts, total_size)
+        raise
