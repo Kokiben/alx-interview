@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import sys
 
+
 def print_solutions(n: int):
     """Backtracking function to find all solutions to the N queens problem."""
     solutions = []
@@ -29,6 +30,7 @@ def print_solutions(n: int):
     solve(0)
     for solution in solutions:
         print(solution)
+
 
 def main():
     # Check argument count
