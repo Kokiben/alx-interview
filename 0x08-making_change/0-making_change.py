@@ -1,30 +1,24 @@
 #!/usr/bin/python3
 """
-minimize the number of coins used to sum up to the total
+Minimize the number of coins used to sum up to the total.
 """
 
-
 def makeChange(coins, total):
-    """
-    Determine the fewest number of coins needed to meet a given amount total.
-
-    Args:
-        coins (list): A list of coin denominations.
-        total (int): The target amount.
-
-    Returns:
-        int: The minimum number of coins needed, or -1 if it's not possible.
-    """
+    # If the total is 0 or less, no coins are needed
     if total <= 0:
         return 0
-
-    # Initialize dp array with a value larger than any possible num of coins
+    
+    # Initialize the dp array with infinity, and dp[0] = 0 (base case)
     dp = [float('inf')] * (total + 1)
-    dp[0] = 0  # Base case: no coins are needed to make total 0
-
-    # Fill dp array
+    dp[0] = 0
+    
+    # Update the dp array for each coin
     for coin in coins:
-        for amount in range(coin, total + 1):
-            dp[amount] = min(dp[amount], dp[amount - coin] + 1)
-
-    return dp[total] if dp[total] != float('inf') else -1
+        for i in range(coin, total + 1):
+            dp[i] = min(dp[i], dp[i - coin] + 1)
+    
+    # If dp[total] is still infinity, it means total cannot be made with the given coins
+    if dp[total] == float('inf'):
+        return -1
+    
+    return dp[total]
