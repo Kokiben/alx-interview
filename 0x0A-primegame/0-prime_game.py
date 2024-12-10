@@ -3,6 +3,7 @@
 Prime Game
 """
 
+
 def isWinner(x, nums):
     """
     Determine the winner of each game round and the overall winner.
@@ -16,6 +17,7 @@ def isWinner(x, nums):
     """
     if not nums or x < 1:
         return None
+
 
     def sieve_of_eratosthenes(max_n):
         """Generate a list of primes up to max_n using the Sieve of Eratosthenes."""
