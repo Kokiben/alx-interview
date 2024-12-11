@@ -4,50 +4,50 @@
 
 
 def _IsPrime(n):
-    """ Checks if a number given n is a prime number """
-    for i in range(2, int(n ** 0.5) + 1):
-        if not n % i:
+    """ Check if `n` is prime. """
+    for j in range(2, int(n ** 0.5) + 1):
+        if not n % j:
             return False
     return True
 
 
 def sieve_of_eratosthenes(n, primes):
-    """ Calculate all primes """
-    top_prime = primes[-1]
-    if n > top_prime:
-        for i in range(top_prime + 1, n + 1):
-            if _IsPrime(i):
-                primes.append(i)
+    """ Extend `primes` with all primes up to `n`. """
+    t_prm = primes[-1]
+    if n > t_prm:
+        for j in range(t_prm + 1, n + 1):
+            if _IsPrime(j):
+                primes.append(j)
             else:
                 primes.append(0)
 
 
 def isWinner(x, nums):
     """
-    Determine the winner of each game round and the overall winner.
+    Determine the overall winner after `x` rounds.
     """
 
-    players_wins = {"Maria": 0, "Ben": 0}
+    plys_wns = {"Maria": 0, "Ben": 0}
 
     primes = [0, 0, 2]
 
     sieve_of_eratosthenes(max(nums), primes)
 
     for round in range(x):
-        sum_options = sum((i != 0 and i <= nums[round])
-                          for i in primes[:nums[round] + 1])
+        s_op = sum((j != 0 and j <= nums[round])
+                          for j in primes[:nums[round] + 1])
 
-        if (sum_options % 2):
+        if (s_op % 2):
             winner = "Maria"
         else:
             winner = "Ben"
 
         if winner:
-            players_wins[winner] += 1
+            plys_wns[winner] += 1
 
-    if players_wins["Maria"] > players_wins["Ben"]:
+    if plyrs_wns["Maria"] > plyrs_wns["Ben"]:
         return "Maria"
-    elif players_wins["Ben"] > players_wins["Maria"]:
+    elif plyrs_wns["Ben"] > plyrs_wns["Maria"]:
         return "Ben"
 
     return None
