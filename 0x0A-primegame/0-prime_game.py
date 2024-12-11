@@ -4,7 +4,7 @@ Define isWineer function, a solution to the Prime Game problem
 """
 
 
-def primes(n):
+def _IsPrime(n):
     """Return list of prime numbers between 1 and n inclusive
        Args:
         n (int): upper boundary of range. lower boundary is always 1
@@ -32,7 +32,7 @@ def isWinner(x, nums):
         return None
     Maria = Ben = 0
     for i in range(x):
-        prime = primes(nums[i])
+        prime = _IsPrime(nums[i])
         if len(prime) % 2 == 0:
             Ben += 1
         else:
