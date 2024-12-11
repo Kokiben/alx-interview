@@ -30,7 +30,7 @@ def isWinner(x, nums):
     You can assume n and x will not be larger than 10000
     """
 
-    players_wins = {"Maria": 0, "Ben": 0}
+    plys_w = {"Maria": 0, "Ben": 0}
 
     primes = [0, 0, 2]
 
@@ -46,11 +46,11 @@ def isWinner(x, nums):
             winner = "Ben"
 
         if winner:
-            players_wins[winner] += 1
+            plys_w[winner] += 1
 
-    if players_wins["Maria"] > players_wins["Ben"]:
+    if plys_w["Maria"] > plys_w["Ben"]:
         return "Maria"
-    elif players_wins["Ben"] > players_wins["Maria"]:
+    elif plys_w["Ben"] > plys_w["Maria"]:
         return "Ben"
 
     return None
