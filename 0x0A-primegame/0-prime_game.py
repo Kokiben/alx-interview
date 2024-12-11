@@ -11,7 +11,7 @@ def _IsPrime(n):
     return True
 
 
-def calculate_primes(n, primes):
+def sieve_of_eratosthenes(n, primes):
     """ Calculate all primes """
     top_prime = primes[-1]
     if n > top_prime:
@@ -31,7 +31,7 @@ def isWinner(x, nums):
 
     primes = [0, 0, 2]
 
-    calculate_primes(max(nums), primes)
+    sieve_of_eratosthenes(max(nums), primes)
 
     for round in range(x):
         sum_options = sum((i != 0 and i <= nums[round])
