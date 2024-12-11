@@ -37,10 +37,10 @@ def isWinner(x, nums):
     calculate_primes(max(nums), primes)
 
     for round in range(x):
-        sum_options = sum((i != 0 and i <= nums[round])
+        s_ops = sum((i != 0 and i <= nums[round])
                           for i in primes[:nums[round] + 1])
 
-        if (sum_options % 2):
+        if (s_ops % 2):
             winner = "Maria"
         else:
             winner = "Ben"
