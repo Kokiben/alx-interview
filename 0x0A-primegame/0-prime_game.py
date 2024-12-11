@@ -9,9 +9,9 @@ def isWinner(x, nums):
     Determine the winner of each game round and the overall winner.
     Args:
         x (int): Number of rounds
-        nums (list): Arrof n values, where each represents bound of int
+        nums (list): Array of n values, where each represents the upper bound of integers in a round
     Returns:
-        str or None: Name of player with most wins, or None if it's a tie.
+        str or None: Name of the player with the most wins ("Maria" or "Ben"), or None if it's a tie.
     """
     if not nums or x < 1:
         return None
