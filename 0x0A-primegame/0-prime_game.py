@@ -3,51 +3,53 @@
 """ prime game """
 
 
-def _IsPrime(n):
-    """ Check if `n` is prime. """
-    for j in range(2, int(n ** 0.5) + 1):
-        if not n % j:
+def is_prime(n):
+    """Check if a number n is prime."""
+    if n < 2:
+        return False
+    for i in range(2, int(n ** 0.5) + 1):
+        if n % i == 0:
             return False
     return True
 
 
-def sieve_of_eratosthenes(n, primes):
-    """ Extend `primes` with all primes up to `n`. """
-    t_prm = primes[-1]
-    if n > t_prm:
-        for j in range(t_prm + 1, n + 1):
-            if _IsPrime(j):
-                primes.append(j)
-            else:
-                primes.append(0)
+def generate_primes_up_to(n):
+    """Generate a list of prime numbers up to n."""
+    primes = []
+    for i in range(2, n + 1):
+        if is_prime(i):
+            primes.append(i)
+    return primes
 
 
 def isWinner(x, nums):
     """
-    Determine the overall winner after `x` rounds.
+    Determine the overall winner after x rounds of the game.
+
+    Args:
+        x (int): Number of rounds.
+        nums (list): List of integers representing the upper limit for each round.
+
+    Returns:
+        str: Name of the winner ("Maria", "Ben", or None if tied).
     """
+    if not nums or x < 1:
+        return None
 
-    plys_wns = {"Maria": 0, "Ben": 0}
+    max_num = max(nums)
+    primes = generate_primes_up_to(max_num)
+    scores = {"Maria": 0, "Ben": 0}
 
-    primes = [0, 0, 2]
-
-    sieve_of_eratosthenes(max(nums), primes)
-
-    for round in range(x):
-        s_op = sum((j != 0 and j <= nums[round])
-                          for j in primes[:nums[round] + 1])
-
-        if (s_op % 2):
-            winner = "Maria"
+    for num in nums:
+        prime_count = sum(1 for p in primes if p <= num)
+        if prime_count % 2 == 1:
+            scores["Maria"] += 1
         else:
-            winner = "Ben"
+            scores["Ben"] += 1
 
-        if winner:
-            plys_wns[winner] += 1
-
-    if plys_wns["Maria"] > plys_wns["Ben"]:
+    if scores["Maria"] > scores["Ben"]:
         return "Maria"
-    elif plys_wns["Ben"] > plys_wns["Maria"]:
+    elif scores["Ben"] > scores["Maria"]:
         return "Ben"
-
     return None
+
