@@ -23,9 +23,9 @@ def isWinner(x, nums):
     if x is None or nums is None or x == 0 or nums == []:
         return None
     Maria = Ben = 0
-    for i in range(x):
-        prime = _IsPrime(nums[i])
-        if len(prime) % 2 == 0:
+    for j in range(x):
+        pm = _IsPrime(nums[j])
+        if len(pm) % 2 == 0:
             Ben += 1
         else:
             Maria += 1
