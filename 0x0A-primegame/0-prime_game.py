@@ -7,14 +7,14 @@ Prime Game
 def _IsPrime(n):
     """Check if a number n is prime.
     """
-    prime = []
+    pm = []
     sieve = [True] * (n + 1)
     for p in range(2, n + 1):
         if (sieve[p]):
-            prime.append(p)
+            pm.append(p)
             for i in range(p, n + 1, p):
                 sieve[i] = False
-    return prime
+    return pm
 
 
 def isWinner(x, nums):
