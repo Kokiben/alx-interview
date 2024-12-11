@@ -45,9 +45,9 @@ def isWinner(x, nums):
         if winner:
             plys_wns[winner] += 1
 
-    if plyrs_wns["Maria"] > plyrs_wns["Ben"]:
+    if plys_wns["Maria"] > plys_wns["Ben"]:
         return "Maria"
-    elif plyrs_wns["Ben"] > plyrs_wns["Maria"]:
+    elif plys_wns["Ben"] > plys_wns["Maria"]:
         return "Ben"
 
     return None
