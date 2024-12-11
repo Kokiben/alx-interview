@@ -8,12 +8,12 @@ def _IsPrime(n):
     """Check if a number n is prime.
     """
     pm = []
-    sieve = [True] * (n + 1)
-    for p in range(2, n + 1):
-        if (sieve[p]):
-            pm.append(p)
-            for i in range(p, n + 1, p):
-                sieve[i] = False
+    s = [True] * (n + 1)
+    for l in range(2, n + 1):
+        if (s[l]):
+            pm.append(l)
+            for j in range(l, n + 1, l):
+                s[j] = False
     return pm
 
 
