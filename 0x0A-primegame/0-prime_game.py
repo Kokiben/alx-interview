@@ -24,10 +24,7 @@ def calculate_primes(n, primes):
 
 def isWinner(x, nums):
     """
-    x is the number of rounds and nums is an array of n
-    Return: name of the player that won the most rounds
-    If the winner cannot be determined, return None
-    You can assume n and x will not be larger than 10000
+    Determine the winner of each game round and the overall winner.
     """
 
     players_wins = {"Maria": 0, "Ben": 0}
