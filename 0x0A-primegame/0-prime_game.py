@@ -9,16 +9,16 @@ def isWinner(x, nums):
     Determine the winner of each game round and the overall winner.
     Args:
         x (int): Number of rounds
-        nums (list): Array of n values, where each represents the upper bound of integers in a round
+        nums (list): Array of n values, where each represents
     Returns:
-        str or None: Name of the player with the most wins ("Maria" or "Ben"), or None if it's a tie.
+        str or None: Name of player with most wins, or None if it's a tie.
     """
     if not nums or x < 1:
         return None
 
 
     def sieve_of_eratosthenes(max_n):
-        """Generate a list of primes up to max_n using the Sieve of Eratosthenes."""
+        """Generate a list of primes up to max_n using  Sieve of Eratosthenes."""
         is_prime = [True] * (max_n + 1)
         is_prime[0] = is_prime[1] = False  # 0 and 1 are not prime
         for i in range(2, int(max_n ** 0.5) + 1):
@@ -41,7 +41,7 @@ def isWinner(x, nums):
 
     # Determine the winner for each round
     for n in nums:
-        if primes_count[n] % 2 == 1:  # Odd number of primes means Maria wins
+        if primes_count[n] % 2 == 1:  # Odd num of primes means Maria wins
             maria_wins += 1
         else:  # Even number of primes means Ben wins
             ben_wins += 1
